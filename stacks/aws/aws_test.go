@@ -1,4 +1,4 @@
-package stacks
+package aws
 
 // The tests below are example tests, you can find more information at
 // https://cdk.tf/testing

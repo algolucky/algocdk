@@ -1,5 +1,6 @@
 # cdktf and terraform ignores
 .terraform
+cdktf.json
 cdktf.out
 cdktf.log
 *terraform.*.tfstate*

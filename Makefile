@@ -1,4 +1,7 @@
 build:
 	go build -o dist/
 
-.PHONY: build
+install:
+	go install
+
+.PHONY: build install

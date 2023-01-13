@@ -1,4 +1,4 @@
-package stacks
+package local
 
 import (
 	"github.com/aws/constructs-go/constructs/v10"
@@ -9,6 +9,12 @@ import (
 	"github.com/cdktf/cdktf-provider-docker-go/docker/v4/image"
 	dockerprovider "github.com/cdktf/cdktf-provider-docker-go/docker/v4/provider"
 )
+
+var LocalStackConfig struct {
+	ContainerRepo string
+	ContainerTag  string
+	AlgodPort     string
+}
 
 func LocalStack(scope constructs.Construct, id string) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, &id)

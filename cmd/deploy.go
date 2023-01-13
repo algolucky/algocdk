@@ -28,7 +28,7 @@ func deploy(cmd *cobra.Command, args []string) {
 	}
 
 	args = []string{
-		"cdktf",
+		binary,
 		"deploy",
 		deployStackID,
 	}

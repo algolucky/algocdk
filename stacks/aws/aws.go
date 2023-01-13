@@ -1,4 +1,4 @@
-package stacks
+package aws
 
 import (
 	"github.com/aws/constructs-go/constructs/v10"
