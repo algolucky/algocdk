@@ -1,0 +1,25 @@
+---
+stack:
+  name: example
+
+network:
+  name: example-v1.0
+  wallets: 5
+
+relays:
+  count: 5
+
+partNodes:
+  count: 5
+
+nonPartNodes:
+  count: 5
+
+groups:
+  - platform: aws
+    platform_config:
+      region: us-east-2
+    topology:
+      relays: 100
+      nonPartNodes: 100
+      partNodes: 100

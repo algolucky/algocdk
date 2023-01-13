@@ -10,6 +10,8 @@ require (
 	github.com/aws/jsii-runtime-go v1.73.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v10 v10.0.12
 	github.com/cdktf/cdktf-provider-docker-go/docker/v4 v4.0.3
+	github.com/cdktf/cdktf-provider-helm-go/helm/v4 v4.0.1
+	github.com/cdktf/cdktf-provider-random-go/random/v4 v4.0.0
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.14.0
 )

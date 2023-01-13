@@ -6,12 +6,12 @@ import (
 	"github.com/spf13/viper"
 )
 
-var deployCmd = &cobra.Command{
-	Use:   "deploy",
-	Short: "Deploy stack",
-	RunE:  deploy,
+var outputsCmd = &cobra.Command{
+	Use:   "outputs",
+	Short: "Print stack outputs",
+	RunE:  outputs,
 }
 
-func deploy(cmd *cobra.Command, args []string) (err error) {
+func outputs(cmd *cobra.Command, args []string) (err error) {
 	return cdktfutil.ExecCdktf([]string{"deploy", viper.GetString("stack")})
 }

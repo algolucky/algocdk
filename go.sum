@@ -48,6 +48,10 @@ github.com/cdktf/cdktf-provider-aws-go/aws/v10 v10.0.12 h1:QxKjeF0kCD/f9jyBiUkI4
 github.com/cdktf/cdktf-provider-aws-go/aws/v10 v10.0.12/go.mod h1:HpPMGwwMUogFoI+/6TEm0p+WOdzATw94BIFKxibkVy4=
 github.com/cdktf/cdktf-provider-docker-go/docker/v4 v4.0.3 h1:mZNkL8wLp9mu4fMD9wL4xUpcu5MPU9beqZcBY9VZE4I=
 github.com/cdktf/cdktf-provider-docker-go/docker/v4 v4.0.3/go.mod h1:N0EJPL0BSuNrtp4Sahzlt3+3wLMS9WpyZKZfZ9Hkb9Q=
+github.com/cdktf/cdktf-provider-helm-go/helm/v4 v4.0.1 h1:NRhsrVLfLtdtmGjqfF8oUvlwn6zWMFdLK5bLh2f8Ma4=
+github.com/cdktf/cdktf-provider-helm-go/helm/v4 v4.0.1/go.mod h1:OgQR98fJ1+1sQXhSrTyFVUqMLML8ik+xqjcFG4oqFZA=
+github.com/cdktf/cdktf-provider-random-go/random/v4 v4.0.0 h1:4vWs3n65PtXK3SuNWIKCLehAuu5V3IXaYIpcr4Npjlo=
+github.com/cdktf/cdktf-provider-random-go/random/v4 v4.0.0/go.mod h1:K6A8uSKveJoT3bebV77+m54bgs9ImoO8umgzPbffV9w=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5PlCu98SY8svDHJxuZscDgtXS6KTTbou5AhLI=

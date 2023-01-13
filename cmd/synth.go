@@ -1,47 +1,30 @@
 package cmd
 
 import (
-	"fmt"
-	"os"
-
-	"github.com/algolucky/algocdk/stacks/local"
-	"github.com/algolucky/algocdk/util"
+	cdktfutil "github.com/algolucky/algocdk/util"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
-
-var synthStackID string
 
 var synthCmd = &cobra.Command{
 	Use:   "synth",
 	Short: "Synthesize a stack",
-	Run:   synth,
+	RunE:  synth,
 }
 
-func init() {
-	rootCmd.AddCommand(synthCmd)
-	synthCmd.Flags().StringVar(&synthStackID, "id", "stack", "The ID (or Name) to give the stack")
-}
-
-func synth(cmd *cobra.Command, args []string) {
+func synth(cmd *cobra.Command, args []string) (err error) {
 	app := cdktf.NewApp(nil)
 
-	exe, err := os.Executable()
+	err = cdktfutil.WriteCdktfJson(viper.GetString("stack"))
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 
-	util.WriteCdktfJson(&util.CdktfJson{
-		Language:         "go",
-		App:              exe + " synth --id " + synthStackID,
-		SendCrashReports: "false",
-	})
-
-	local.LocalStack(app, synthStackID, local.LocalStackConfig{
-		AlgodContainerRepo: "algolucky/algod",
-		AlgodContainerTag:  "container-update-docs",
-		AlgodPort:          18080,
-	})
+	// stack := cdktf.NewTerraformStack(app, &stackID)
+	// stacks.ContainerStackSimple(stack, config.C.Container)
 
 	app.Synth()
+
+	return
 }

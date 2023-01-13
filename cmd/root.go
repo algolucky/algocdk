@@ -7,11 +7,14 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/algolucky/algocdk/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-var cfgFile string
+var (
+	configFile string
+)
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -30,24 +33,22 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $PWD/algocdk.yaml")
+
+	rootCmd.AddCommand(deployCmd)
+	rootCmd.AddCommand(synthCmd)
+	rootCmd.AddCommand(outputsCmd)
+	rootCmd.AddCommand(destroyCmd)
+
+	rootCmd.PersistentFlags().String("config", "", "config file (default is ./algocdk.yaml")
+	rootCmd.PersistentFlags().String("stack", "", "stack name")
+
+	viper.BindPFlag("stack", rootCmd.Flags().Lookup("stack"))
 }
 
 func initConfig() {
-	if cfgFile != "" {
-		viper.SetConfigFile(cfgFile)
-	} else {
-		wd, err := os.Getwd()
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-
-		viper.AddConfigPath(wd)
-		viper.SetConfigName("algocdk.yml")
-	}
-
-	if err := viper.ReadInConfig(); err != nil {
+	config.InitConfig(configFile)
+	err := config.Unmarshal()
+	if err != nil {
 		fmt.Println(err)
 	}
 }
