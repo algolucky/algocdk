@@ -10,26 +10,26 @@ import (
 	dockerprovider "github.com/cdktf/cdktf-provider-docker-go/docker/v4/provider"
 )
 
-var LocalStackConfig struct {
-	ContainerRepo string
-	ContainerTag  string
-	AlgodPort     string
+type LocalStackConfig struct {
+	AlgodContainerRepo string
+	AlgodContainerTag  string
+	AlgodPort          float64
 }
 
-func LocalStack(scope constructs.Construct, id string) cdktf.TerraformStack {
+func LocalStack(scope constructs.Construct, id string, config LocalStackConfig) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, &id)
 
 	dockerprovider.NewDockerProvider(stack, jsii.String("docker"), &dockerprovider.DockerProviderConfig{})
 
 	algodImage := image.NewImage(stack, jsii.String("algodImage"), &image.ImageConfig{
-		Name: jsii.String("algolucky/algod:container-update-docs"),
+		Name: jsii.String(config.AlgodContainerRepo + ":" + config.AlgodContainerTag),
 	})
 
 	container.NewContainer(stack, jsii.String("algodContainer"), &container.ContainerConfig{
 		Image: algodImage.Latest(),
 		Name:  jsii.String("algod"),
 		Ports: &[]*container.ContainerPorts{{
-			Internal: jsii.Number(8080), External: jsii.Number(18080),
+			Internal: jsii.Number(8080), External: jsii.Number(config.AlgodPort),
 		}},
 	})
 

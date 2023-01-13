@@ -37,7 +37,11 @@ func synth(cmd *cobra.Command, args []string) {
 		SendCrashReports: "false",
 	})
 
-	local.LocalStack(app, synthStackID)
+	local.LocalStack(app, synthStackID, local.LocalStackConfig{
+		AlgodContainerRepo: "algolucky/algod",
+		AlgodContainerTag:  "container-update-docs",
+		AlgodPort:          18080,
+	})
 
 	app.Synth()
 }
