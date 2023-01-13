@@ -30,7 +30,7 @@ func destroy(cmd *cobra.Command, args []string) {
 	args = []string{
 		"cdktf",
 		"destroy",
-		deployStackID,
+		destroyStackID,
 	}
 
 	err = syscall.Exec(binary, args, os.Environ())
