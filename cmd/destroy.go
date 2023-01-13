@@ -28,7 +28,7 @@ func destroy(cmd *cobra.Command, args []string) {
 	}
 
 	args = []string{
-		"cdktf",
+		binary,
 		"destroy",
 		destroyStackID,
 	}
