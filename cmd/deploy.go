@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var deployStackID string
+
 var deployCmd = &cobra.Command{
 	Use:   "deploy",
 	Short: "Deploy stack",
@@ -16,7 +18,7 @@ var deployCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(deployCmd)
-	deployCmd.Flags().StringVar(&stackID, "id", "stack", "The ID (or Name) to give the stack")
+	deployCmd.Flags().StringVar(&deployStackID, "id", "stack", "The ID (or Name) to give the stack")
 }
 
 func deploy(cmd *cobra.Command, args []string) {
@@ -28,7 +30,7 @@ func deploy(cmd *cobra.Command, args []string) {
 	args = []string{
 		"cdktf",
 		"deploy",
-		stackID,
+		deployStackID,
 	}
 
 	err = syscall.Exec(binary, args, os.Environ())
