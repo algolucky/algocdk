@@ -25,12 +25,16 @@ func LocalStack(scope constructs.Construct, id string, config LocalStackConfig) 
 		Name: jsii.String(config.AlgodContainerRepo + ":" + config.AlgodContainerTag),
 	})
 
-	container.NewContainer(stack, jsii.String("algodContainer"), &container.ContainerConfig{
+	algodContainer := container.NewContainer(stack, jsii.String("algodContainer"), &container.ContainerConfig{
 		Image: algodImage.Latest(),
 		Name:  jsii.String("algod"),
 		Ports: &[]*container.ContainerPorts{{
 			Internal: jsii.Number(8080), External: jsii.Number(config.AlgodPort),
 		}},
+	})
+
+	cdktf.NewTerraformOutput(stack, jsii.String("id"), &cdktf.TerraformOutputConfig{
+		Value: algodContainer.Id(),
 	})
 
 	return stack
