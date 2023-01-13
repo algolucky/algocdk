@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 
 	"github.com/algolucky/algocdk/stacks/local"
+	"github.com/algolucky/algocdk/util"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 	"github.com/spf13/cobra"
 )
@@ -23,12 +23,6 @@ func init() {
 	synthCmd.Flags().StringVar(&synthStackID, "id", "stack", "The ID (or Name) to give the stack")
 }
 
-type cdktfJson struct {
-	Language         string `json:"language"`
-	App              string `json:"app"`
-	SendCrashReports string `json:"sendCrashReports"`
-}
-
 func synth(cmd *cobra.Command, args []string) {
 	app := cdktf.NewApp(nil)
 
@@ -37,17 +31,11 @@ func synth(cmd *cobra.Command, args []string) {
 		fmt.Println(err)
 	}
 
-	cdktfJson := &cdktfJson{
+	util.WriteCdktfJson(&util.CdktfJson{
 		Language:         "go",
 		App:              exe + " synth --id " + synthStackID,
 		SendCrashReports: "false",
-	}
-
-	file, err := json.MarshalIndent(cdktfJson, "", "  ")
-	if err != nil {
-		panic(err)
-	}
-	os.WriteFile("cdktf.json", file, 0644)
+	})
 
 	local.LocalStack(app, synthStackID)
 
