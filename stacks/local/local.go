@@ -21,12 +21,12 @@ func LocalStack(scope constructs.Construct, id string) cdktf.TerraformStack {
 
 	dockerprovider.NewDockerProvider(stack, jsii.String("docker"), &dockerprovider.DockerProviderConfig{})
 
-	dockerImage := image.NewImage(stack, jsii.String("algodImage"), &image.ImageConfig{
+	algodImage := image.NewImage(stack, jsii.String("algodImage"), &image.ImageConfig{
 		Name: jsii.String("algolucky/algod:container-update-docs"),
 	})
 
 	container.NewContainer(stack, jsii.String("algodContainer"), &container.ContainerConfig{
-		Image: dockerImage.Latest(),
+		Image: algodImage.Latest(),
 		Name:  jsii.String("algod"),
 		Ports: &[]*container.ContainerPorts{{
 			Internal: jsii.Number(8080), External: jsii.Number(18080),
